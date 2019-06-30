@@ -32,12 +32,9 @@ public class Tourist {
     //f. Date of birth
     private java.sql.Date dateOfBirth;
 
-    //g. List of flights
-    //https://stackoverflow.com/questions/5867130/hibernate-liststring
-    /*@ElementCollection
-    private List<Long> listOfFlights = new ArrayList<>();*/
-
     //SETTERS AND GETTERS
+
+    //SETTER AND GETTER ID
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
@@ -47,6 +44,7 @@ public class Tourist {
         this.id = id;
     }
 
+    //SETTER AND GETTER FIRST NAME
     @Column(name = "first_name", nullable = false)
     public String getFirstName() {
         return firstName;
@@ -56,6 +54,7 @@ public class Tourist {
         this.firstName = firstName;
     }
 
+    //SETTER AND GETTER LAST NAME
     @Column(name = "last_name", nullable = false)
     public String getLastName() {
         return lastName;
@@ -65,6 +64,7 @@ public class Tourist {
         this.lastName = lastName;
     }
 
+    //SETTER AND GETTER GENDER( MALE OR FEMALE )
     public String getGender() {
         return gender;
     }
@@ -73,6 +73,7 @@ public class Tourist {
         this.gender = gender;
     }
 
+    //SETTER AND GETTER COUNTRY
     public String getCountry() {
         return country;
     }
@@ -81,6 +82,7 @@ public class Tourist {
         this.country = country;
     }
 
+    //GETTER AND SETTER DATE OF BIRTH
     public java.sql.Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -89,6 +91,7 @@ public class Tourist {
         this.dateOfBirth = dateOfBirth;
     }
 
+    //SETTER AND GETTER REMARKS
     public String getRemarks() {
         return remarks;
     }
@@ -96,15 +99,5 @@ public class Tourist {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
-    /*@org.hibernate.annotations.CollectionId(columns = "")
-    @Column(name = "List_of_flights")
-    public List<Long> getListOfFlights() {
-        return listOfFlights;
-    }
-
-    public void addFlight(Long idFlight) {
-        this.listOfFlights.add(idFlight);
-    }*/
-
 
 }

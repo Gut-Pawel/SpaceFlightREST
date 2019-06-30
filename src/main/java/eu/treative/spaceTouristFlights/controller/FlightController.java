@@ -37,52 +37,20 @@ public class FlightController {
         return ResponseEntity.ok().body(flight);
     }
 
+    /* CREATE NEW FLIGHT */
     @PostMapping("/flights")
     public Flight createFlight(@Valid @RequestBody Flight flight) {
         return flightRepository.save(flight);
     }
 
-    /*
-    @ElementCollection
-    @PutMapping("/flights/{id}/{touristID}")
-    public ResponseEntity<Flight> updateFlight(@PathVariable(value = "id") Long flightID,
-                                               @PathVariable(value = "touristID") Long touristID) throws ResourceNotFoundException {
+    /* DELETE FLIGHT */
+    @DeleteMapping("/flights/{id}")
+    public ResponseEntity<?> deleteFlight(@PathVariable(value = "id") Long flightID) throws ResourceNotFoundException{
         Flight flight = flightRepository.findById(flightID)
-                .orElseThrow(() -> new ResourceNotFoundException("Flight not found on :: " + flightID));
+                .orElseThrow(() -> new ResourceNotFoundException("Flight " + flightID + " id not found"));
+        flightRepository.delete(flight);
 
-        //Set<Long> list = flightRepository.findById(flightID).get().getListOfTourist();
-
-        flight.setId(flight.getId());
-        flight.setDeparature(flight.getDeparature());
-        flight.setArrival(flight.getArrival());
-        flight.setNumberOfSeats(flight.getNumberOfSeats());
-        flight.setPrice(flight.getPrice());
-
-        Set<Long> updatedList = new TreeSet<>(flight.getListOfTourist());
-        updatedList.add(touristID);
-
-        flight.setListOfTourist(updatedList);
-        System.out.println(updatedList.size() + " ilosc elementow ");
-
-        flight.getListOfTourist().forEach(i -> {
-            System.out.println(i);
-        });
-
-
-        updatedList.add(touristID);
-
-        flight.getListOfTourist().addAll(updatedList);
-
-
-
-
-        //flight.getListOfTourist().add(touristID);
-
-        final Flight updatedFlight = flightRepository.save(flight);
-
-        return ResponseEntity.ok(updatedFlight);
+        return ResponseEntity.ok().build();
     }
-*/
-
 
 }

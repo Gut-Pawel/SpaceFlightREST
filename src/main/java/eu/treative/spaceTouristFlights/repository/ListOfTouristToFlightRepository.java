@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ListOfTouristToFlightRepository extends JpaRepository<ListOfTouristToFlight, Long> {
 
+
 }

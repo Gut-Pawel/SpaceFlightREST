@@ -4,6 +4,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.jpa.repository.Modifying;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.*;
 
 
@@ -18,28 +20,31 @@ public class Flight {
 
     private long id;
 
-    //a. Departure date and time
-    private java.sql.Date deparature;
+    //a. Departure date
+    private java.sql.Date deparatureDate;
 
-    //b. Arrival date and time
-    private java.sql.Date arrival;
+    //a2. Deparature time
+    private java.sql.Time deparatureTime;
+
+    //b. Arrival date
+    private java.sql.Date arrivalDate;
+
+    //b2. Arrival time
+    private java.sql.Time arrivalTime;
 
     //c. Number of seats
     private long numberOfSeats;
 
     //d. List of tourists
 
-    //@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    /*@ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "id", joinColumns = @JoinColumn(name = "flight_ID") )
-    @Column(name = "tourist_id")
-    private Set<Long> listOfTourist = new HashSet<Long>();*/
+    //List of tourist is on separate table(name = list_of_tourist_to_flight
 
     //e. Ticket price
     private float price;
 
     //SETTERS AND GETTERS
 
+    //SETTER AND GETTER ID
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
@@ -50,21 +55,47 @@ public class Flight {
         this.id = id;
     }
 
-    public void setDeparature(java.sql.Date deparature) {
-        this.deparature = deparature;
+    //SETTER AND GETTER DEPARATURE DATE
+
+    public void setDeparatureDate(java.sql.Date deparature) {
+        this.deparatureDate = deparature;
     }
 
-    public java.sql.Date getDeparature() {
-        return deparature;
+    public java.sql.Date getDeparatureDate() {
+        return deparatureDate;
     }
 
-    public java.sql.Date getArrival() {
-        return arrival;
+    //SETTER AND GETTER DEPARATURE TIME
+
+    public void setDeparatureTime(Time deparatureTime) {
+        this.deparatureTime = deparatureTime;
     }
 
-    public void setArrival(java.sql.Date arrival) {
-        this.arrival = arrival;
+    public Time getDeparatureTime() {
+        return deparatureTime;
     }
+
+    //SETTER AND GETTER ARRIVAL DATE
+
+    public java.sql.Date getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(java.sql.Date arrival) {
+        this.arrivalDate = arrival;
+    }
+
+    //SETTER AND GETTER ARRIVAL TIME
+
+    public Time getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(Time arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    //SETTER AND GETTER NUMBER OF SEATS
 
     public long getNumberOfSeats() {
         return numberOfSeats;
@@ -74,6 +105,8 @@ public class Flight {
         this.numberOfSeats = numberOfSeats;
     }
 
+    //SETTER AND GETTER PRICE
+
     public float getPrice() {
         return price;
     }
@@ -81,32 +114,5 @@ public class Flight {
     public void setPrice(float price) {
         this.price = price;
     }
-
-    /* List of flights */
-
-    /*
-    @ElementCollection
-    //@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "tourist_id")
-    public Set<Long> getListOfTourist() {
-
-        return listOfTourist;
-    }
-
-    @ElementCollection
-    public Set<Long> getListOfTourist(Long touristID) {
-        this.getListOfTourist().add(touristID);
-        listOfTourist.add(touristID);
-        return listOfTourist;
-    }
-
-    @ElementCollection
-    public void setListOfTourist(Set<Long> touristID) {
-        this.listOfTourist = listOfTourist;
-    }
-
-    @ElementCollection
-    public void addTouristToList(Long touristID) {
-        listOfTourist.add(touristID);
-    }*/
 
 }
